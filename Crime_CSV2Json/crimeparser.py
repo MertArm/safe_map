@@ -23,7 +23,7 @@ data.drop(["CASE#",
            "Census Tracts",
            "Wards"], axis = 1, inplace = True)
 
-df = DataFrame(data, columns= [' PRIMARY DESCRIPTION','LATITUDE','LONGITUDE'])
+df = DataFrame(data, columns= {' PRIMARY DESCRIPTION','LATITUDE','LONGITUDE'})
 df.to_csv("crimes.csv", sep=",")
 
 csvfile = open('crimes.csv', 'r')
@@ -31,5 +31,5 @@ jsonfile = open('crimes.json', 'w')
 
 fieldnames = ('DATE  OF OCCURRENCE', ' PRIMARY DESCRIPTION','LATITUDE','LONGITUDE')
 reader = csv.DictReader( csvfile, fieldnames)
-out = json.dumps( [ row for row in reader ] )
+out = json.dumps( {"crimes": [ row for row in reader ]} )
 jsonfile.write(out)
